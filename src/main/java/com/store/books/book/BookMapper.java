@@ -1,11 +1,19 @@
 package com.store.books.book;
 
 //import com.store.books.file.FileUtils;
+import com.store.books.file.FileUtils;
 import com.store.books.history.BookTransactionHistory;
+import com.store.books.history.BookTransactionHistoryRepo;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookMapper {
+    private final BookTransactionHistoryRepo bookTransactionHistoryRepo;
+
+    public BookMapper(BookTransactionHistoryRepo bookTransactionHistoryRepo) {
+        this.bookTransactionHistoryRepo = bookTransactionHistoryRepo;
+    }
+
     public Book toBook(BookRequest request) {
         return Book.builder()
                 .id(request.id())
@@ -29,19 +37,20 @@ public class BookMapper {
                 .archived(book.isArchived())
                 .shareable(book.isShareable())
                  .owner(book.getOwner().fullName())
-//                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
+                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
     }
-//
-//    public BorrowedBookResponse toBorrowedBookResponse(BookTransactionHistory history) {
-//        return BorrowedBookResponse.builder()
-//                .id(history.getBook().getId())
-//                .title(history.getBook().getTitle())
-//                .authorName(history.getBook().getAuthorName())
-//                .isbn(history.getBook().getIsbn())
-//                .rate(history.getBook().getRate())
-//                .returned(history.isReturned())
-//                .returnApproved(history.isReturnApproved())
-//                .build();
-//    }
+
+
+    public BorrowedBookResponse toBorrowedBookResponse(BookTransactionHistory bookTransactionHistoryRepo) {
+        return BorrowedBookResponse.builder()
+                .id(bookTransactionHistoryRepo.getBook().getId())
+                .title(bookTransactionHistoryRepo.getBook().getTitle())
+                .authorName(bookTransactionHistoryRepo.getBook().getAuthorName())
+                .isbn(bookTransactionHistoryRepo.getBook().getIsbn())
+                .rate(bookTransactionHistoryRepo.getBook().getRate())
+                .returned(bookTransactionHistoryRepo.isReturned())
+                .returnApproved(bookTransactionHistoryRepo.isReturnApproved())
+                .build();
+    }
 }
