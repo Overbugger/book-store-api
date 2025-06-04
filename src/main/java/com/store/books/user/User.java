@@ -1,5 +1,7 @@
 package com.store.books.user;
 
+import com.store.books.book.Book;
+import com.store.books.history.BookTransactionHistory;
 import com.store.books.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -41,6 +43,12 @@ public class User implements UserDetails, Principal {
     private String password;
     private boolean accountLocked;
     private boolean enabled;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookTransactionHistory> histories;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
