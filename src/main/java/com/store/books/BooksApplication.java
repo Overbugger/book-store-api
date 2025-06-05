@@ -18,12 +18,12 @@ public class BooksApplication {
 		SpringApplication.run(BooksApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner runner(RoleRepo roleRepo) {
-		return args -> {
-			if (roleRepo.findByName("USER").isEmpty()) {
-				roleRepo.save(Role.builder().name("USER").build());
-			}
-		};
-	}
+//	@Bean
+//	public CommandLineRunner runner(RoleRepo roleRepo) {
+//		return args -> {
+//			if (roleRepo.findByName("USER").isEmpty()) {
+//				roleRepo.save(Role.builder().name("USER").build());
+//			}
+//		};
+//	}
 }

@@ -73,7 +73,7 @@ public class GlobalExceptionHandler {
                 );
     }
 
-    //    @ExceptionHandler(ActivationTokenException.class)
+//        @ExceptionHandler(ActivationTokenException.class)
 //    public ResponseEntity<ExceptionResponse> handleException(ActivationTokenException exp) {
 //        return ResponseEntity
 //                .status(BAD_REQUEST)
@@ -83,7 +83,7 @@ public class GlobalExceptionHandler {
 //                                .build()
 //                );
 //    }
-//
+
     @ExceptionHandler(OperationNotPermittedException.class)
     public ResponseEntity<ExceptionResponse> handleException(OperationNotPermittedException exp) {
         return ResponseEntity
